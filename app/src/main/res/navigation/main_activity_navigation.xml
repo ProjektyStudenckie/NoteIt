@@ -6,9 +6,15 @@
     app:startDestination="@+id/navigation_notes">
 
     <fragment
+        android:id="@+id/navigation_instant_note"
+        android:name="com.sww.noteit.view.InstantNoteFragment"
+        android:label="@string/instant_note"
+        tools:layout="@layout/instant_note_fragment"/>
+
+    <fragment
         android:id="@+id/navigation_notes"
         android:name="com.sww.noteit.view.NotesFragment"
-        android:label="@string/settings"
+        android:label="@string/notes"
         tools:layout="@layout/settings_fragment"/>
 
     <fragment

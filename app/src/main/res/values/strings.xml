@@ -2,4 +2,5 @@
     <string name="app_name">NoteIt</string>
     <string name="settings">Settings</string>
     <string name="notes">Notes</string>
+    <string name="instant_note">Instant Note</string>
 </resources>

@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/navigation_instant_note"
+        android:icon="@drawable/ic_note_add_24"
+        android:title="@string/instant_note" />
+
+    <item
         android:id="@+id/navigation_notes"
         android:icon="@drawable/ic_note_24"
         android:title="@string/notes" />

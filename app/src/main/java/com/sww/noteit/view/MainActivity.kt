@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
+                R.id.navigation_instant_note,
                 R.id.navigation_notes,
                 R.id.navigation_settings
             )

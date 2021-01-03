@@ -1,4 +1,4 @@
-package com.jsosna.noteit
+package com.sww.noteit
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

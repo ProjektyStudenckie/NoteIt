@@ -1,4 +1,4 @@
-package com.jsosna.noteit
+package com.sww.noteit
 
 import org.junit.Test
 

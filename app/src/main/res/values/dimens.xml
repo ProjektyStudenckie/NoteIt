@@ -2,4 +2,5 @@
 <resources>
     <dimen name="font_size_s">14sp</dimen>
     <dimen name="font_size_m">18sp</dimen>
+    <dimen name="font_size_l">28sp</dimen>
 </resources>

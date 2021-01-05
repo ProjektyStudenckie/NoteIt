@@ -10,6 +10,15 @@
 <!--        <item name="android:windowLightStatusBar">true</item>-->
     </style>
 
+    <style name="BaseActivityTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="toolbarStyle">@style/CustomToolbarStyle</item>
+        <item name="android:statusBarColor">@color/secondaryColor</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
     <style name="CustomToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
         <item name="titleTextColor">@color/primaryTextColor</item>
         <item name="android:background">@color/secondaryColor</item>

@@ -2,11 +2,13 @@ package com.sww.noteit.view
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -17,11 +19,16 @@ import com.sww.noteit.model.Note
 import com.sww.noteit.util.SwipeToDeleteCallback
 import com.sww.noteit.view_model.NotesViewModel
 import com.sww.noteit.view_model.adapters.NotesListAdapter
-import kotlinx.android.synthetic.main.list_item_note.view.*
+import kotlinx.android.synthetic.main.custom_input_dialog.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class NotesFragment : Fragment() {
+
+    companion object {
+        const val NOTE_ID = "NOTE_ID"
+    }
 
     private lateinit var notesViewModel: NotesViewModel
 
@@ -52,7 +59,7 @@ class NotesFragment : Fragment() {
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(binding.notesList)
 
-        // temporary way to create list
+        // temporary way to add data to the list
         val tempListOfNotes = mutableListOf(
             Note(
                 1,
@@ -84,9 +91,19 @@ class NotesFragment : Fragment() {
 //        })
 
 
+        notesViewModel.shouldAddNewNote.observe(viewLifecycleOwner, {
+            if(it) {
+                showCreateNewNoteDialog(notesListAdapter)
+                notesViewModel.addNewNoteDone()
+            }
+        })
+
+
         notesListAdapter.setOnClickListener(object : NotesListAdapter.OnClickListener {
             override fun onClick(position: Int, model: Note) {
-                // TODO: Go to NoteActivity
+                val intent = Intent(context, NoteActivity::class.java)
+                intent.putExtra(NOTE_ID, model.id)
+                startActivity(intent)
             }
         })
 
@@ -110,5 +127,23 @@ class NotesFragment : Fragment() {
                 dialog.dismiss()
             }
             .show()
+    }
+
+    private fun showCreateNewNoteDialog(notesListAdapter: NotesListAdapter) {
+        val builder = AlertDialog.Builder(this.requireContext())
+        val dialogLayout = layoutInflater.inflate(R.layout.custom_input_dialog, null)
+
+        with(builder) {
+            setTitle("Enter The Title")
+            setPositiveButton(R.string.confirm) { _, _ ->
+                // TODO: Create new note in db and fetch them
+
+                notesListAdapter.notifyDataSetChanged()
+            }
+            setNegativeButton(R.string.cancel) { _, _ ->
+            }
+            setView(dialogLayout)
+            show()
+        }
     }
 }

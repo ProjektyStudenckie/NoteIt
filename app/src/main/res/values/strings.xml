@@ -7,4 +7,6 @@
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="delete_note_confirmation">Do you really want to delete this note?</string>
+    <string name="confirm">Confirm</string>
+    <string name="title">Title</string>
 </resources>

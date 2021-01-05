@@ -14,6 +14,7 @@ import com.sww.noteit.databinding.NotesFragmentBinding
 import com.sww.noteit.view_model.InstantNoteViewModel
 import com.sww.noteit.view_model.NotesViewModel
 
+
 class InstantNoteFragment : Fragment() {
 
     private lateinit var instantNoteViewModel: InstantNoteViewModel
@@ -21,7 +22,7 @@ class InstantNoteFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding: InstantNoteFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.instant_note_fragment, container, false)

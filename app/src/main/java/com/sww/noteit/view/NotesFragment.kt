@@ -28,7 +28,7 @@ class NotesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding: NotesFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.notes_fragment, container, false)

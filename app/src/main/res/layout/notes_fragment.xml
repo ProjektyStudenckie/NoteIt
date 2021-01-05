@@ -10,16 +10,50 @@
             type="com.sww.noteit.view_model.NotesViewModel" />
     </data>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.sww.noteit.view.NotesFragment">
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <TextView
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Notes Fragment" />
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="@color/primaryColor"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@android:color/darker_gray"
+            app:strokeWidth="1dp">
 
-    </FrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notes_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="20"
+                tools:listitem="@layout/list_item_note" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_note_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="20dp"
+            android:contentDescription="@string/add_new_note"
+            android:src="@drawable/ic_note_add_24"
+            app:backgroundTint="@color/secondaryColor"
+            app:rippleColor="@color/primaryColor"
+            app:tint="@color/primaryColor"
+            android:onClick="@{() -> notesViewModel.addNewNote()}"/>
+
+    </RelativeLayout>
 </layout>

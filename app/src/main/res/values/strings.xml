@@ -9,4 +9,7 @@
     <string name="delete_note_confirmation">Do you really want to delete this note?</string>
     <string name="confirm">Confirm</string>
     <string name="title">Title</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="incorrect_data">Invalid Title!</string>
+    <string name="save">Save</string>
 </resources>

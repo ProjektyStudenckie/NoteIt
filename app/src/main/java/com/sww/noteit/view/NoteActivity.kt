@@ -1,7 +1,10 @@
 package com.sww.noteit.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_note.*
 class NoteActivity : AppCompatActivity() {
 
     private lateinit var noteViewModel: NoteViewModel
+    private var noteID: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +25,7 @@ class NoteActivity : AppCompatActivity() {
         val binding: ActivityNoteBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_note)
 
-        val noteID = intent.extras?.getInt(NotesFragment.NOTE_ID)
+        noteID = intent.extras?.getInt(NotesFragment.NOTE_ID)
 
         setSupportActionBar(toolbar_note)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -42,5 +46,20 @@ class NoteActivity : AppCompatActivity() {
         Toast.makeText(this, "Note Saved 💾", Toast.LENGTH_SHORT).show()
 
         return super.onSupportNavigateUp()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_edit_note_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.edit_note_menu_item) {
+            val intent = Intent(this, EditNoteActivity::class.java)
+            intent.putExtra(NotesFragment.NOTE_ID, noteID)
+            startActivity(intent)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

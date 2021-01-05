@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="editNoteViewModel"
+            type="com.sww.noteit.view_model.EditNoteViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.EditNoteActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_edit_note"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_note_title"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="16dp"
+                android:hint="@string/title"
+                app:boxBackgroundColor="@color/secondaryColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords"
+                    android:text="@={editNoteViewModel.title}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/deleteButton"
+                    android:layout_width="53dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@android:color/black"
+                    android:onClick="@{() -> editNoteViewModel.deleteNoteFromDB()}"
+                    android:textSize="30sp"
+                    app:icon="@drawable/ic_delete_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+
+                <Button
+                    android:id="@+id/sendButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> editNoteViewModel.saveNote()}"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:text="@string/save"
+                    android:textAllCaps="true"
+                    android:textSize="30sp"
+                    app:icon="@drawable/ic_save_24"
+                    app:iconGravity="end"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_invalid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/incorrect_data"
+                android:textAllCaps="true"
+                android:textColor="@android:color/holo_red_light"
+                android:textStyle="bold"
+                android:visibility="@{editNoteViewModel.showInvalidMessage ? View.VISIBLE : View.GONE}"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

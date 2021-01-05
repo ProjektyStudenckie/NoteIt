@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sww.noteit.R
 
 
-abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+abstract class SwipeToDeleteCallback(context: Context) :
+    ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
     private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete_24)
     private val intrinsicWidth = deleteIcon?.intrinsicWidth
@@ -56,14 +57,25 @@ abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleC
         val isCanceled = dX == 0f && !isCurrentlyActive
 
         if (isCanceled) {
-            clearCanvas(c, itemView.right + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat())
+            clearCanvas(
+                c,
+                itemView.right + dX,
+                itemView.top.toFloat(),
+                itemView.right.toFloat(),
+                itemView.bottom.toFloat()
+            )
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             return
         }
 
         // Draw the red delete background
         background.color = backgroundColor
-        background.setBounds(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
+        background.setBounds(
+            itemView.right + dX.toInt(),
+            itemView.top,
+            itemView.right,
+            itemView.bottom
+        )
         background.draw(c)
 
         intrinsicHeight?.let {
@@ -76,7 +88,12 @@ abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleC
                 val deleteIconBottom = deleteIconTop + intrinsicHeight
 
                 // Draw the delete icon
-                deleteIcon?.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
+                deleteIcon?.setBounds(
+                    deleteIconLeft,
+                    deleteIconTop,
+                    deleteIconRight,
+                    deleteIconBottom
+                )
                 deleteIcon?.draw(c)
             }
         }

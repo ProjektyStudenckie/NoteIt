@@ -9,18 +9,18 @@
         android:id="@+id/navigation_instant_note"
         android:name="com.sww.noteit.view.InstantNoteFragment"
         android:label="@string/instant_note"
-        tools:layout="@layout/instant_note_fragment"/>
+        tools:layout="@layout/instant_note_fragment" />
 
     <fragment
         android:id="@+id/navigation_notes"
         android:name="com.sww.noteit.view.NotesFragment"
         android:label="@string/notes"
-        tools:layout="@layout/settings_fragment"/>
+        tools:layout="@layout/settings_fragment" />
 
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.sww.noteit.view.SettingsFragment"
         android:label="@string/settings"
-        tools:layout="@layout/settings_fragment"/>
+        tools:layout="@layout/settings_fragment" />
 
 </navigation>

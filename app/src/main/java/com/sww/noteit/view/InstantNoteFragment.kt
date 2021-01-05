@@ -1,11 +1,11 @@
 package com.sww.noteit.view
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.sww.noteit.R
@@ -23,6 +23,7 @@ class InstantNoteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
 
         val binding: InstantNoteFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.instant_note_fragment, container, false)
@@ -33,5 +34,16 @@ class InstantNoteFragment : Fragment() {
         binding.instantNoteViewModel = instantNoteViewModel
 
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.instant_note_menu_item) {
+            Toast.makeText(this.requireContext(), "Save Instant Note", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_instant_note_menu, menu)
     }
 }

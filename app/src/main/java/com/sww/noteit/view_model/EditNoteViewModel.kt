@@ -28,7 +28,7 @@ class EditNoteViewModel(noteID: Int?, application: Application) : AndroidViewMod
     }
 
     fun saveNote() {
-        if(!validate()) {
+        if (!validate()) {
             showInvalidMessage.value = true
             return
         }

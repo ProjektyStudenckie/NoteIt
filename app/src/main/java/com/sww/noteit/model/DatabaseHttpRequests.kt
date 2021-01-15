@@ -2,6 +2,7 @@ package com.sww.noteit.model
 
 import android.util.Log
 import okhttp3.*
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
 class DatabaseHttpRequests {
@@ -9,7 +10,26 @@ class DatabaseHttpRequests {
     companion object {
         fun sendPostRequest(userName: String, password: String) {
 
-           
+            val url ="https://gwldrwcys5.execute-api.us-east-1.amazonaws.com/Prod/login/login?UserID=$userName&Password=$password"
+
+            val payload = "test payload"
+
+            val okHttpClient = OkHttpClient()
+            val requestBody = payload.toRequestBody()
+            val request = Request.Builder()
+                .method("POST", requestBody)
+                .url(url)
+                .build()
+            okHttpClient.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    // Handle this
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    Log.e("response", response.body?.string() as String)
+                }
+            })
+
         }
 
         fun sendGetLoginRequest(userName: String, password: String) {
@@ -20,13 +40,12 @@ class DatabaseHttpRequests {
             val client = OkHttpClient()
             client.newCall(request).enqueue(object :Callback{
                 override fun onResponse(call: Call, response: Response) {
-                    Log.e("response", response.body()?.string() as String)
+                    Log.e("response", response.body?.string() as String)
                 }
                 override fun onFailure(call: Call, e: IOException) {
                     TODO("Not yet implemented")
                 }
             })
-            Log.e("response", request.body().toString())
         }
 
         fun sendGetNotesRequest(userName: String) {
@@ -37,13 +56,12 @@ class DatabaseHttpRequests {
             val client = OkHttpClient()
             client.newCall(request).enqueue(object :Callback{
                 override fun onResponse(call: Call, response: Response) {
-                    Log.e("response", response.body()?.string() as String)
+                    Log.e("response", response.body?.string() as String)
                 }
                 override fun onFailure(call: Call, e: IOException) {
                     TODO("Not yet implemented")
                 }
             })
-            Log.e("response", request.body().toString())
         }
     }
 }

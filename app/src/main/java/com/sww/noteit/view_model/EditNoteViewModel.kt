@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.sww.noteit.model.DatabaseHttpRequests
 
 
 class EditNoteViewModel(noteID: Int?, application: Application) : AndroidViewModel(application) {
@@ -23,8 +22,6 @@ class EditNoteViewModel(noteID: Int?, application: Application) : AndroidViewMod
     val deleteNote: LiveData<Boolean>
         get() = _deleteNote
 
-    val request = DatabaseHttpRequests.Companion.sendGetLoginRequest("wielok","Wielocukier98")
-    val request2 = DatabaseHttpRequests.Companion.sendGetNotesRequest("wielok")
     fun deleteNoteFromDB() {
         //TODO: Delete note from db
 

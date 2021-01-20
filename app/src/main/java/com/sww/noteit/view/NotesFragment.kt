@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -19,7 +18,6 @@ import com.sww.noteit.model.Note
 import com.sww.noteit.util.SwipeToDeleteCallback
 import com.sww.noteit.view_model.NotesViewModel
 import com.sww.noteit.view_model.adapters.NotesListAdapter
-import kotlinx.android.synthetic.main.custom_input_dialog.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -60,29 +58,6 @@ class NotesFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(binding.notesList)
 
         // temporary way to add data to the list
-        val tempListOfNotes = mutableListOf(
-            Note(
-                1,
-                "Notatka numer 1",
-                "dsvkomdsvodnsvoidnsovidsnovisdonvo o sndvodnvods\r osnvodsnvoisnvod"
-            ),
-            Note(
-                2,
-                "Notatka numer 2",
-                "dsvkomdsvodnsvoidnsovidsnovisdonvo o sndvodnvods\r osnvodsnvoisnvod"
-            ),
-            Note(
-                3,
-                "Notatka numer 3",
-                "dsvkomdsvodnsvoidnsovidsnovisdonvo o sndvodnvods\r osnvodsnvoisnvod"
-            ),
-            Note(
-                4,
-                "Notatka numer 4",
-                "dsvkomdsvodnsvoidnsovidsnovisdonvo o sndvodnvods\r osnvodsnvoisnvod"
-            )
-        )
-        notesListAdapter.setNotes(tempListOfNotes)
 
 
         // TODO: Create LiveData allNotes and fetch the data from db

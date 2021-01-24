@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.sww.noteit.R
 import com.sww.noteit.databinding.ActivityEditNoteBinding
 import com.sww.noteit.view_model.EditNoteViewModel
@@ -35,19 +36,19 @@ class EditNoteActivity : AppCompatActivity() {
         binding.editNoteViewModel = editNoteViewModel
 
 
-        editNoteViewModel.finishActivity.observe(this, {
+        editNoteViewModel.finishActivity.observe(this) {
             if (it) {
                 finish()
             }
-        })
+        }
 
-        editNoteViewModel.deleteNote.observe(this, {
+        editNoteViewModel.deleteNote.observe(this) {
             if (it) {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)
                 finish()
             }
-        })
+        }
     }
 }

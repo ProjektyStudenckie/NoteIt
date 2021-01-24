@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -79,12 +80,12 @@ class NotesFragment : Fragment() {
         })
 
 
-        notesViewModel.shouldAddNewNote.observe(viewLifecycleOwner, {
+        notesViewModel.shouldAddNewNote.observe(viewLifecycleOwner) {
             if(it) {
                 showCreateNewNoteDialog(notesListAdapter)
                 notesViewModel.addNewNoteDone()
             }
-        })
+        }
 
 
         notesListAdapter.setOnClickListener(object : NotesListAdapter.OnClickListener {

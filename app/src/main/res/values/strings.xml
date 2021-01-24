@@ -12,4 +12,6 @@
     <string name="edit_note">Edit Note</string>
     <string name="incorrect_data">Invalid Title!</string>
     <string name="save">Save</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

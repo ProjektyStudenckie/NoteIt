@@ -1,23 +1,43 @@
 package com.sww.noteit.view
 
+import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.sww.noteit.R
 import com.sww.noteit.databinding.ActivityNoteBinding
+import com.sww.noteit.model.Photo
 import com.sww.noteit.view_model.NoteViewModel
 import com.sww.noteit.view_model.NoteViewModelFactory
+import com.sww.noteit.view_model.adapters.PhotosListAdapter
 import kotlinx.android.synthetic.main.activity_note.*
+import java.io.IOException
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 
-class NoteActivity : AppCompatActivity() {
+class NoteActivity : AppCompatActivity(), PhotosListAdapter.OnClickListener {
+
+    companion object {
+        private const val CAMERA_PERMISSION_CODE = 1
+        private const val CAMERA_REQUEST_CODE = 2
+    }
 
     private lateinit var noteViewModel: NoteViewModel
     private var noteID: Int? = null
+
+    private lateinit var adapter: PhotosListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +59,20 @@ class NoteActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.noteViewModel = noteViewModel
 
+        // set up the RecyclerView
+
+        //TODO sztuczna lista
+
+//        var image: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_camera);
+
+//        val photosTMPList = mutableListOf(
+//            Photo(1, image)
+//        )
+//
+//        val photosListAdapter = PhotosListAdapter(mutableListOf<Photo>(), this)
+//        binding.photosRecyclerView.adapter = photosListAdapter
+
+//        photosListAdapter.setPhotos(photosTMPList)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -59,7 +93,60 @@ class NoteActivity : AppCompatActivity() {
             intent.putExtra(NotesFragment.NOTE_ID, noteID)
             startActivity(intent)
             return true
+        } else if (item.itemId == R.id.take_picture_menu_item) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    android.Manifest.permission.CAMERA
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, CAMERA_REQUEST_CODE)
+            } else {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.CAMERA),
+                    CAMERA_PERMISSION_CODE
+                )
+            }
+            return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, CAMERA_REQUEST_CODE)
+            } else {
+                Toast.makeText(this, "oops", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        //TODO change image View to something different and save picture
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CAMERA_REQUEST_CODE) {
+                val thumbNail: Bitmap = data!!.extras!!.get("data") as Bitmap
+                //imageView.setImageBitmap(thumbNail)
+
+                //Todo add item to recycler view
+                // TODO: Create LiveData allNotes and fetch the data from db
+//              notesViewModel.allNotes.observe(viewLifecycleOwner, { notes ->
+//              notes?.let { notesListAdapter.setNotes(it.toMutableList()) }
+//                 })
+
+
+            }
+        }
+    }
+
+    override fun onClick(position: Int, model: Photo) {
+        TODO("Not yet implemented")
     }
 }

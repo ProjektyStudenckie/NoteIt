@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData
 
 class EditNoteViewModel(noteID: Int?, application: Application) : AndroidViewModel(application) {
 
+
+
     val title = MutableLiveData<String>()
 
     val showInvalidMessage = MutableLiveData<Boolean>().apply { value = false }
@@ -19,7 +21,6 @@ class EditNoteViewModel(noteID: Int?, application: Application) : AndroidViewMod
     private var _deleteNote = MutableLiveData<Boolean>().apply { value = false }
     val deleteNote: LiveData<Boolean>
         get() = _deleteNote
-
 
     fun deleteNoteFromDB() {
         //TODO: Delete note from db
@@ -34,7 +35,7 @@ class EditNoteViewModel(noteID: Int?, application: Application) : AndroidViewMod
         }
 
         //TODO: Save note in db
-
+        //DatabaseHttpRequests.sendUpdateNotesRequest()
         _finishActivity.value = true
     }
 

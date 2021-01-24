@@ -1,13 +1,17 @@
 package com.sww.noteit.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.sww.noteit.R
 import com.sww.noteit.databinding.InstantNoteFragmentBinding
+import com.sww.noteit.model.DatabaseHttpRequests
+import com.sww.noteit.model.Note
+
 import com.sww.noteit.view_model.InstantNoteViewModel
 
 
@@ -28,6 +32,9 @@ class InstantNoteFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.instantNoteViewModel = instantNoteViewModel
+
+        DatabaseHttpRequests.sendPostNotesRequest(Note(33,"Wielok","Kurczak","Ziemniak chodził po polanie i sie smazyl","dzis","wykop.pl"))
+        Log.e("response", "leci")
 
         return binding.root
     }

@@ -1,14 +1,17 @@
 package com.sww.noteit.view_model.adapters
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.sww.noteit.R
 import com.sww.noteit.model.Note
 import kotlinx.android.synthetic.main.list_item_note.view.*
-import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -25,14 +28,16 @@ class NotesListAdapter(private val context: Context) :
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val note = notes[position]
 
         if (holder is MyViewHolder) {
-            holder.itemView.note_title.text = note.title
+            holder.itemView.note_title.text = note.Title
 
-            val format = SimpleDateFormat("dd-MM-yyy", Locale.GERMAN)
-            holder.itemView.note_date.text = format.format(note.date)
+            val format = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.GERMAN)
+            holder.itemView.note_date.text = LocalDate.parse(note.DateDate,format).toString()
+
 
 
             holder.itemView.setOnClickListener {

@@ -23,6 +23,8 @@ import com.sww.noteit.model.Note
 import com.sww.noteit.util.SwipeToDeleteCallback
 import com.sww.noteit.view_model.NotesViewModel
 import com.sww.noteit.view_model.adapters.NotesListAdapter
+import kotlinx.android.synthetic.main.activity_note.view.*
+import kotlinx.android.synthetic.main.custom_input_dialog.view.*
 import kotlinx.android.synthetic.main.list_item_note.view.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -72,8 +74,6 @@ class NotesFragment : Fragment() {
         DataContainer.allNotes.observe(viewLifecycleOwner, { notes ->
             notes?.let {
                 Log.e("taggdfgdf",it.size.toString())
-
-
                 notesListAdapter.setNotes(it.toMutableList())
             }
         })
@@ -114,12 +114,12 @@ class NotesFragment : Fragment() {
             }
             .setPositiveButton(resources.getString(R.string.delete)) { dialog, _ ->
                 DatabaseHttpRequests.sendDeleteNotesRequest(DataContainer.userName,adapter.getNotes()[adapterPosition].ID)
-                DataContainer.Refresh()
                 dialog.dismiss()
             }
             .show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun showCreateNewNoteDialog(notesListAdapter: NotesListAdapter) {
         val builder = AlertDialog.Builder(this.requireContext())
         val dialogLayout = layoutInflater.inflate(R.layout.custom_input_dialog, null)
@@ -128,9 +128,9 @@ class NotesFragment : Fragment() {
             setTitle("Enter The Title")
             setPositiveButton(R.string.confirm) { _, _ ->
                 // TODO: Create new note in db and fetch them
-                //DatabaseHttpRequests.sendPostNotesRequest(Note())
+                DatabaseHttpRequests.sendPostNotesRequest(Note(DataContainer.GetBiggestId()+1,DataContainer.userName,dialogLayout.et_title.text.toString(),"",LocalDate.now().format(DataContainer.format),""))
                 //.setNotes()
-                notesListAdapter.notifyDataSetChanged()
+
             }
             setNegativeButton(R.string.cancel) { _, _ ->
             }

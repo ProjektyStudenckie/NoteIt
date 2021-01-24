@@ -35,7 +35,7 @@ class EditNoteViewModel(noteID: Int?, application: Application) : AndroidViewMod
         }
 
         //TODO: Save note in db
-
+        //DatabaseHttpRequests.sendUpdateNotesRequest()
         _finishActivity.value = true
     }
 

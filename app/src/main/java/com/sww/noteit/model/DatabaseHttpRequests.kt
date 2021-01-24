@@ -31,6 +31,7 @@ class DatabaseHttpRequests {
 
                 override fun onResponse(call: Call, response: Response) {
                     Log.e("response", response.body?.string() as String)
+                    DataContainer.Refresh()
                 }
             })
 
@@ -44,6 +45,7 @@ class DatabaseHttpRequests {
             val content=note.Note
             val date=note.DateDate
 
+            Log.e("values",userName+UUID+imageUrl+title+content+date)
             val url = "https://gwldrwcys5.execute-api.us-east-1.amazonaws.com/Prod/post-note-for-user?UserID=$userName&UUID=$UUID&ImageUrl=$imageUrl&Title=$title&Note=$content&Date=$date"
             val payload = "test payload"
 
@@ -60,6 +62,7 @@ class DatabaseHttpRequests {
 
                 override fun onResponse(call: Call, response: Response) {
                     Log.e("response", response.body?.string() as String)
+                    DataContainer.Refresh()
                 }
             })
 
@@ -89,6 +92,7 @@ class DatabaseHttpRequests {
 
                 override fun onResponse(call: Call, response: Response) {
                     Log.e("response", response.body?.string() as String)
+                    DataContainer.Refresh()
                 }
             })
 
@@ -103,6 +107,7 @@ class DatabaseHttpRequests {
             client.newCall(request).enqueue(object :Callback{
                 override fun onResponse(call: Call, response: Response) {
                     Log.e("response", response.body?.string() as String)
+                    DataContainer.Refresh()
                 }
                 override fun onFailure(call: Call, e: IOException) {
                     TODO("Not yet implemented")
@@ -142,6 +147,7 @@ class DatabaseHttpRequests {
             client.newCall(request).enqueue(object :Callback{
                 override fun onResponse(call: Call, response: Response) {
                     Log.e("response", response.body?.string() as String)
+                    DataContainer.Refresh()
                 }
                 override fun onFailure(call: Call, e: IOException) {
                     TODO("Not yet implemented")

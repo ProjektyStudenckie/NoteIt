@@ -1,7 +1,5 @@
 package com.sww.noteit.view
 
-import android.content.Intent
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -10,9 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.sww.noteit.R
 import com.sww.noteit.databinding.InstantNoteFragmentBinding
-import com.sww.noteit.databinding.NotesFragmentBinding
 import com.sww.noteit.view_model.InstantNoteViewModel
-import com.sww.noteit.view_model.NotesViewModel
 
 
 class InstantNoteFragment : Fragment() {
@@ -37,7 +33,7 @@ class InstantNoteFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.instant_note_menu_item) {
+        if (item.itemId == R.id.save_note_instant_menu_item) {
             Toast.makeText(this.requireContext(), "Save Instant Note", Toast.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)

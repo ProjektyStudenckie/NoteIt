@@ -1,7 +1,6 @@
 package com.sww.noteit.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -9,8 +8,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sww.noteit.R
-import com.sww.noteit.model.DatabaseHttpRequests
-import com.sww.noteit.model.Note
+import com.sww.noteit.model.DataContainer
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,11 +27,9 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
+        DataContainer.Refresh()
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        DatabaseHttpRequests.sendPostNotesRequest(Note(35,"Wielok","Kurczak","Ziemniak chodził po polanie i sie smazyl","dzis","wykop.pl"))
-        DatabaseHttpRequests.sendUpdateNotesRequest(Note(34,"Wielok","Ziemniak","Ziemniak chodził po polanie i sie smazyl i skakal","dzis","wykop./mikroblog"))
-        Log.e("response", "leci")
     }
 }

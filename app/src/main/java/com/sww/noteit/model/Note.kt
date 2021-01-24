@@ -1,11 +1,15 @@
 package com.sww.noteit.model
 
+import kotlinx.serialization.Serializable
 
+
+@Serializable
 data class Note(
-    val id: Int = 0,
-    var userName:String,
-    var title: String,
-    var content: String,
-    var date: String,
-    var imageUrl:String
+    val ID: Int = 0,
+    var UserID:String,
+    var Title: String,
+    var Note: String,
+    var DateDate: String,
+    var ImageURL:String
 )
+

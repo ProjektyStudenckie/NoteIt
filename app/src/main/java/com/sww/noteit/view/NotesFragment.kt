@@ -74,7 +74,6 @@ class NotesFragment : Fragment() {
         // TODO: Create LiveData allNotes and fetch the data from db
         DataContainer.allNotes.observe(viewLifecycleOwner, { notes ->
             notes?.let {
-                Log.e("taggdfgdf",it.size.toString())
                 notesListAdapter.setNotes(it.toMutableList())
             }
         })

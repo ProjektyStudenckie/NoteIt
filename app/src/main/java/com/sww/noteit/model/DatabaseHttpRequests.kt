@@ -2,6 +2,7 @@ package com.sww.noteit.model
 
 import android.util.Log
 import com.sww.noteit.model.DataContainer.Companion.allNotes
+import com.sww.noteit.model.DataContainer.Companion.authentication
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import okhttp3.*
@@ -30,8 +31,8 @@ class DatabaseHttpRequests {
                 }
 
                 override fun onResponse(call: Call, response: Response) {
+                    authentication.value = response.body?.string().toBoolean()
                     Log.e("response", response.body?.string() as String)
-                    DataContainer.Refresh()
                 }
             })
 

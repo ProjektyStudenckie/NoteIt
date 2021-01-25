@@ -11,9 +11,11 @@ import java.util.*
 class DataContainer {
 
     companion object {
+        var authentication: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+        var allNotes:MutableLiveData<List<Note>> = MutableLiveData<List<Note>>()
+
         var userName:String="Wielok"
         lateinit var response:ResponseBody
-        var allNotes:MutableLiveData<List<Note>> = MutableLiveData<List<Note>>()
 
         @RequiresApi(Build.VERSION_CODES.O)
         val format = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.GERMAN)

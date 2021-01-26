@@ -113,7 +113,7 @@ class DatabaseHttpRequests {
                     DataContainer.Refresh()
                 }
                 override fun onFailure(call: Call, e: IOException) {
-                    TODO("Not yet implemented")
+                    authentication.postValue(false)
                 }
             })
         }
@@ -153,7 +153,6 @@ class DatabaseHttpRequests {
                     DataContainer.Refresh()
                 }
                 override fun onFailure(call: Call, e: IOException) {
-                    TODO("Not yet implemented")
                 }
             })
         }

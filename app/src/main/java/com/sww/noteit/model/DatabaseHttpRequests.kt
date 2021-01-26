@@ -107,7 +107,7 @@ class DatabaseHttpRequests {
             val client = OkHttpClient()
             client.newCall(request).enqueue(object :Callback{
                 override fun onResponse(call: Call, response: Response) {
-                    Log.e("response", response.body?.string() as String)
+                    authentication.postValue(response.body?.string().toBoolean())
                     DataContainer.Refresh()
                 }
                 override fun onFailure(call: Call, e: IOException) {

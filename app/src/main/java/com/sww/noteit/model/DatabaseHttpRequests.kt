@@ -18,6 +18,7 @@ class DatabaseHttpRequests {
 
 
             val payload = "test payload"
+            DataContainer.userName=userName
 
             val okHttpClient = OkHttpClient()
             val requestBody = payload.toRequestBody()
@@ -31,8 +32,8 @@ class DatabaseHttpRequests {
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    authentication.value = response.body?.string().toBoolean()
-                    Log.e("response", response.body?.string() as String)
+                    DataContainer.registration.postValue(response.body?.string().toBoolean())
+
                 }
             })
 
@@ -104,6 +105,7 @@ class DatabaseHttpRequests {
 
             val request=Request.Builder().url(url).build()
 
+            DataContainer.userName=userName
             val client = OkHttpClient()
             client.newCall(request).enqueue(object :Callback{
                 override fun onResponse(call: Call, response: Response) {

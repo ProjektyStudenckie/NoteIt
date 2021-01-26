@@ -12,9 +12,10 @@ class DataContainer {
 
     companion object {
         var authentication: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+        var registration: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
         var allNotes:MutableLiveData<List<Note>> = MutableLiveData<List<Note>>()
 
-        var userName:String="Wielok"
+        var userName:String=String()
         lateinit var response:ResponseBody
 
         @RequiresApi(Build.VERSION_CODES.O)

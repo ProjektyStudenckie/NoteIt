@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.sww.noteit.R
 import com.sww.noteit.databinding.ActivityEditNoteBinding
+import com.sww.noteit.model.DataContainer
+import com.sww.noteit.model.DatabaseHttpRequests
 import com.sww.noteit.view_model.EditNoteViewModel
 import com.sww.noteit.view_model.EditNoteViewModelFactory
 import kotlinx.android.synthetic.main.activity_edit_note.*
@@ -27,7 +29,7 @@ class EditNoteActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar_edit_note)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Edit Note"
+        supportActionBar?.title = DataContainer.currentNote.Title
 
         val editNoteViewModelFactory = EditNoteViewModelFactory(noteID, application)
         editNoteViewModel =
@@ -35,15 +37,19 @@ class EditNoteActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.editNoteViewModel = editNoteViewModel
 
+        til_note_title.editText?.setText(DataContainer.currentNote.Title)
 
         editNoteViewModel.finishActivity.observe(this) {
             if (it) {
+                DataContainer.currentNote.Title=til_note_title.editText?.getText().toString()
+                DatabaseHttpRequests.sendUpdateNotesRequest(DataContainer.currentNote)
                 finish()
             }
         }
 
         editNoteViewModel.deleteNote.observe(this) {
             if (it) {
+                DatabaseHttpRequests.sendDeleteNotesRequest(DataContainer.userName, DataContainer.currentNote.ID)
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)

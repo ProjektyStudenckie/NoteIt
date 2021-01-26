@@ -16,6 +16,7 @@ class DataContainer {
         var allNotes:MutableLiveData<List<Note>> = MutableLiveData<List<Note>>()
 
         var userName:String=String()
+        lateinit var currentNote:Note
         lateinit var response:ResponseBody
 
         @RequiresApi(Build.VERSION_CODES.O)

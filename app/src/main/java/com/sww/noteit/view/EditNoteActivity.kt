@@ -43,6 +43,9 @@ class EditNoteActivity : AppCompatActivity() {
             if (it) {
                 DataContainer.currentNote.Title=til_note_title.editText?.getText().toString()
                 DatabaseHttpRequests.sendUpdateNotesRequest(DataContainer.currentNote)
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
                 finish()
             }
         }

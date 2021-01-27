@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
@@ -17,15 +16,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.sww.noteit.R
 import com.sww.noteit.databinding.ActivityNoteBinding
+import com.sww.noteit.model.DataContainer
+import com.sww.noteit.model.DatabaseHttpRequests
 import com.sww.noteit.model.Photo
 import com.sww.noteit.view_model.NoteViewModel
 import com.sww.noteit.view_model.NoteViewModelFactory
 import com.sww.noteit.view_model.adapters.PhotosListAdapter
 import kotlinx.android.synthetic.main.activity_note.*
-import java.io.IOException
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
 class NoteActivity : AppCompatActivity(), PhotosListAdapter.OnClickListener {
 
@@ -51,13 +48,14 @@ class NoteActivity : AppCompatActivity(), PhotosListAdapter.OnClickListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // TODO: get title of the note and set supportActionBar title with it
-        supportActionBar?.title = "Note"
+        supportActionBar?.title = DataContainer.currentNote.Title
 
         val noteViewModelFactory = NoteViewModelFactory(noteID, application)
         noteViewModel =
             ViewModelProvider(this, noteViewModelFactory).get(NoteViewModel::class.java)
         binding.lifecycleOwner = this
         binding.noteViewModel = noteViewModel
+        et_note_content.setText(DataContainer.currentNote.Note)
 
         // set up the RecyclerView
 
@@ -77,12 +75,15 @@ class NoteActivity : AppCompatActivity(), PhotosListAdapter.OnClickListener {
 
     override fun onSupportNavigateUp(): Boolean {
         //TODO: Update note in db
+        DataContainer.currentNote.Note=et_note_content.getText().toString()
+        DatabaseHttpRequests.sendUpdateNotesRequest(DataContainer.currentNote)
         Toast.makeText(this, "Note Saved 💾", Toast.LENGTH_SHORT).show()
 
         return super.onSupportNavigateUp()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        DataContainer.currentNote.Note=et_note_content.getText().toString()
         menuInflater.inflate(R.menu.toolbar_edit_note_menu, menu)
         return true
     }

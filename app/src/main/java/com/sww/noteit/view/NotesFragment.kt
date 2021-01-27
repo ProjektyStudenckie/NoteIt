@@ -58,20 +58,14 @@ class NotesFragment : Fragment() {
         binding.notesList.adapter = notesListAdapter
 
 
-        // Removing notes by swiping
         val swipeHandler = object : SwipeToDeleteCallback(this.requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                // TODO: Remove note from db
                 requestDeleteConfirmation(notesListAdapter, viewHolder.adapterPosition)
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(binding.notesList)
 
-        // temporary way to add data to the list
-
-
-        // TODO: Create LiveData allNotes and fetch the data from db
         DataContainer.allNotes.observe(viewLifecycleOwner, { notes ->
             notes?.let {
                 notesListAdapter.setNotes(it.toMutableList())
@@ -90,6 +84,7 @@ class NotesFragment : Fragment() {
         notesListAdapter.setOnClickListener(object : NotesListAdapter.OnClickListener {
             override fun onClick(position: Int, model: Note) {
                 val intent = Intent(context, NoteActivity::class.java)
+                DataContainer.currentNote = model
                 intent.putExtra(NOTE_ID, model.ID)
                 startActivity(intent)
             }

@@ -1,193 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     tools:context=".view.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/secondaryColor">
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="              Login:"
-            android:layout_weight = "1"
-            android:textSize="20dp"/>
+            android:gravity="center"
+            android:layout_marginTop="40dp"
+            android:textSize="37dp"
+            android:text="Welcome to NoteIt!"
+            android:textColor="@android:color/white"/>
 
-        <EditText
-            android:id="@+id/loginName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:layout_weight = "2"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="45dp"
+            app:cardElevation="8dp"
+            app:strokeWidth="2dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="-45dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/loginName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Login"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="16dp"
+                    app:hintTextColor="@color/secondaryColor"
+                    app:boxStrokeColor="@color/secondaryColor"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/loginPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="16dp"
+                    app:hintTextColor="@color/secondaryColor"
+                    app:boxStrokeColor="@color/secondaryColor"
+                    app:endIconMode="password_toggle"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:id="@+id/loginBtn"
+                    android:textSize="@dimen/font_size_l"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="Login"
+                    android:layout_marginTop="100dp"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:id="@+id/goToSignUpBtn"
+                    android:textSize="@dimen/font_size_l"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="Sign up"
+                    />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="      Password:"
-            android:layout_weight = "1"
-            android:textSize="20dp"/>
-
-        <EditText
-            android:id="@+id/loginPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:layout_weight = "2"/>
-    </LinearLayout>
-
-
-        <Button
-            android:id="@+id/loginBtn"
-            android:layout_width="208dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="209dp"
-            android:background="@drawable/button_background"
-            android:text="Log In"
-            app:layout_constraintTop_toBottomOf="@+id/loginPassword"
-            tools:layout_editor_absoluteX="50dp" />
-
-        <Button
-            android:id="@+id/goToSignUpBtn"
-            android:layout_width="208dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="26dp"
-            android:background="@drawable/button_background"
-            android:text="Sign up"
-            app:layout_constraintTop_toBottomOf="@+id/loginBtn"
-            tools:layout_editor_absoluteX="50dp" />
-
-
-</LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<androidx.constraintlayout.widget.ConstraintLayout-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    tools:context=".view.LoginActivity">-->
-
-<!--    <ImageView-->
-<!--        android:layout_width="548dp"-->
-<!--        android:layout_height="419dp"-->
-<!--        android:src="@drawable/login_background"-->
-<!--        tools:layout_editor_absoluteX="-69dp"-->
-<!--        tools:layout_editor_absoluteY="-202dp" />-->
-
-<!--    TODO change pic to colored one-->
-<!--    <ImageView-->
-<!--        android:id="@+id/imageView2"-->
-<!--        android:layout_width="472dp"-->
-<!--        android:layout_height="212dp"-->
-<!--        android:layout_marginBottom="526dp"-->
-<!--        android:scaleType="centerCrop"-->
-<!--        android:src="@drawable/login_background_blue"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHeight_percent=".3"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.0" />-->
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHeight_percent=".75"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="1"-->
-<!--        android:background="@drawable/view_background">-->
-
-
-<!--        <androidx.viewpager.widget.ViewPager-->
-<!--            android:id="@+id/viewPager"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHeight_percent=".7"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />-->
-
-<!--        <TableLayout-->
-<!--            android:id="@+id/tabLayout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"/>-->
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--&lt;!&ndash;    Image View LOGO&ndash;&gt;-->
-
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Witamy w NoteIt!"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageView2"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.498"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        android:textSize="20sp"/>-->
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+</layout>

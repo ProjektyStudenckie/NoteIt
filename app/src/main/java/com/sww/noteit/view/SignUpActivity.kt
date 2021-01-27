@@ -31,7 +31,6 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
 
-
         DataContainer.registration.observe(this, { authentication ->
             authentication?.let {
                 Log.e("kurczak","kurczak")

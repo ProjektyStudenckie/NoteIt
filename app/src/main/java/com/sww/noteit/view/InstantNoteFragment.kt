@@ -59,7 +59,6 @@ class InstantNoteFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 val data: String = "" + s
-                Log.e("note: ", data)
                 saveDataInternally(data)
             }
         })
@@ -81,8 +80,7 @@ class InstantNoteFragment : Fragment() {
                 DataHolder.SINGLETON_currentNote = note
                 DataHolder.SINGLETON_noteContent = note.readText()
                 DataHolder.isInitialized = true
-
-            Log.e("note content: ", DataHolder.SINGLETON_noteContent)}
+            }
 
         }
     }
@@ -112,19 +110,11 @@ class InstantNoteFragment : Fragment() {
 
         //test
         val inputAsString = FileInputStream(note).bufferedReader().use { it.readText() }
-        Log.e("content: ", inputAsString)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.save_note_instant_menu_item) {
             Toast.makeText(this.requireContext(), "Save Instant Note", Toast.LENGTH_SHORT).show()
-
-//            val navController = findNavController(R.id.)
-
-//            val intent = Intent(this, EditNoteActivity::class.java)
-//            intent.putExtra(NotesFragment.NOTE_ID, noteID)
-//            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }

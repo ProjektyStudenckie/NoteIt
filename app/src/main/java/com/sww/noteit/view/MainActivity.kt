@@ -33,17 +33,5 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-//        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-//            if (destination.id == R.id.navigation_instant_note){
-//                Log.e("dest", "instant note")
-//
-//                if (DataHolder.isInitialized){
-//                    Log.e("content", "is init")
-//                    InstantNoteFragment.NoteSingleton.loadInstantNoteContent()
-//                    Log.e("sd",DataHolder.SINGLETON_noteContent)
-//                }
-//            }
-//        }
     }
 }

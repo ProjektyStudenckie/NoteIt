@@ -55,11 +55,9 @@ class SignUpActivity : AppCompatActivity() {
 
         DataContainer.registration.observe(this, { authentication ->
             authentication?.let {
-                Log.e("kurczak","kurczak")
                 if (authentication) {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    Log.e("kurczak","kurczak")
 
                     createUserInstantNoteDb(user)
                 }
@@ -77,9 +75,5 @@ class SignUpActivity : AppCompatActivity() {
         FileOutputStream(file).use {
             it.write(userName.toByteArray())
         }
-
-        val inputAsString = FileInputStream(file).bufferedReader().use { it.readText() }
-        Log.e("user: ", inputAsString)
-        Log.e("dir: ", filesDir.toString())
     }
 }

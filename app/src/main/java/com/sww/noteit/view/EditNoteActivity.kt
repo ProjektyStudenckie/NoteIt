@@ -2,6 +2,7 @@ package com.sww.noteit.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -30,6 +31,10 @@ class EditNoteActivity : AppCompatActivity() {
         setSupportActionBar(toolbar_edit_note)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = DataContainer.currentNote.Title
+
+        Log.e("current note", "${DataContainer.currentNote}")
+        Log.e("current note title", "${DataContainer.currentNote.Title}")
+
 
         val editNoteViewModelFactory = EditNoteViewModelFactory(noteID, application)
         editNoteViewModel =

@@ -1,33 +1,41 @@
 package com.sww.noteit.view
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
 import com.sww.noteit.R
 import com.sww.noteit.databinding.InstantNoteFragmentBinding
 import com.sww.noteit.model.DataContainer
 import com.sww.noteit.model.DataHolder
+import com.sww.noteit.model.DatabaseHttpRequests
+import com.sww.noteit.model.Note
 import com.sww.noteit.view_model.InstantNoteViewModel
+import com.sww.noteit.view_model.NotesViewModel
+import com.sww.noteit.view_model.adapters.NotesListAdapter
+import kotlinx.android.synthetic.main.custom_input_dialog.view.*
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.time.LocalDate
 
 
 class InstantNoteFragment : Fragment() {
 
     private lateinit var instantNoteViewModel: InstantNoteViewModel
 
-    lateinit var currentNote: File
+    private lateinit var notesViewModel: NotesViewModel
+
+//    lateinit var currentNote: File
 
     private lateinit var et_noteContent: EditText
 
@@ -39,6 +47,8 @@ class InstantNoteFragment : Fragment() {
 
         val binding: InstantNoteFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.instant_note_fragment, container, false)
+
+        notesViewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
 
         instantNoteViewModel = ViewModelProvider(this).get(InstantNoteViewModel::class.java)
 
@@ -98,7 +108,7 @@ class InstantNoteFragment : Fragment() {
 
         // create new file for currrent user
         val note = File(instatNoteDbDir, "$currentUser.txt")
-        currentNote = note
+//        currentNote = note
         DataHolder.SINGLETON_currentNote = note
         DataHolder.SINGLETON_noteContent = noteContent
         DataHolder.isInitialized = true
@@ -112,14 +122,46 @@ class InstantNoteFragment : Fragment() {
         val inputAsString = FileInputStream(note).bufferedReader().use { it.readText() }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.save_note_instant_menu_item) {
             Toast.makeText(this.requireContext(), "Save Instant Note", Toast.LENGTH_SHORT).show()
+
+//            val intent = Intent(activity, EditNoteActivity::class.java)
+//            startActivity(intent)
+
+            showCreateNewNoteDialog()
+            notesViewModel.addNewNoteDone()
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.toolbar_instant_note_menu, menu)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun showCreateNewNoteDialog() {
+        val builder = AlertDialog.Builder(this.requireContext())
+        val dialogLayout = layoutInflater.inflate(R.layout.custom_input_dialog, null)
+
+        with(builder) {
+            setTitle("Enter The Title")
+            setPositiveButton(R.string.confirm) { _, _ ->
+                // TODO: Create new note in db and fetch them
+                DatabaseHttpRequests.sendPostNotesRequest(
+                    Note(
+                        DataContainer.GetBiggestId()+1,
+                        DataContainer.userName,
+                        dialogLayout.et_title.text.toString(),
+                        DataHolder.SINGLETON_noteContent,
+                        LocalDate.now().format(DataContainer.format),"")
+                )
+            }
+            setNegativeButton(R.string.cancel) { _, _ ->
+            }
+            setView(dialogLayout)
+            show()
+        }
     }
 }

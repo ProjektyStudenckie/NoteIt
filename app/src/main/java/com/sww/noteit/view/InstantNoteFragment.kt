@@ -6,13 +6,13 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.sww.noteit.R
 import com.sww.noteit.databinding.InstantNoteFragmentBinding
+import com.sww.noteit.model.DataContainer
 import com.sww.noteit.model.DataHolder
 import com.sww.noteit.view_model.InstantNoteViewModel
 import java.io.File
@@ -44,6 +44,7 @@ class InstantNoteFragment : Fragment() {
         binding.instantNoteViewModel = instantNoteViewModel
 
         et_noteContent = binding.root.findViewById(R.id.et_note_content)
+        et_noteContent.setText(DataHolder.SINGLETON_noteContent);
         DataHolder.editText = et_noteContent
 
         // detect change and save them to db, might also save after every activity change
@@ -67,17 +68,22 @@ class InstantNoteFragment : Fragment() {
 
     object NoteSingleton {
         fun loadInstantNoteContent() {
-            val note = DataHolder.SINGLETON_currentNote
+            val dir = "/data/user/0/com.sww.noteit/files"
 
-            Log.e("note content: ", DataHolder.SINGLETON_noteContent)
+            // create new directory for instantNotes
+            val instatNoteDbDir = File(dir, "instantNoteDB")
+            instatNoteDbDir.mkdirs()
 
-            // everythin ok TODO update edit text
-            DataHolder.editText.setText(DataHolder.SINGLETON_noteContent)
+            // create new file for currrent user
 
-            val inputAsString = FileInputStream(note).bufferedReader().use { it.readText() }
-            Log.e("after: ", inputAsString)
+            val note = File(instatNoteDbDir, "${DataContainer.userName}.txt")
+            if(note.exists()) {
+                DataHolder.SINGLETON_currentNote = note
+                DataHolder.SINGLETON_noteContent = note.readText()
+                DataHolder.isInitialized = true
 
-            Log.e("edit text: ", DataHolder.editText.text.toString())
+            Log.e("note content: ", DataHolder.SINGLETON_noteContent)}
+
         }
     }
 

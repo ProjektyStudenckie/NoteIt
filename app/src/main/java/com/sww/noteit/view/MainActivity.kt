@@ -3,7 +3,6 @@ package com.sww.noteit.view
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -21,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
-
+        InstantNoteFragment.NoteSingleton.loadInstantNoteContent()
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_instant_note,
@@ -42,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 if (DataHolder.isInitialized){
                     Log.e("content", "is init")
                     InstantNoteFragment.NoteSingleton.loadInstantNoteContent()
+                    Log.e("sd",DataHolder.SINGLETON_noteContent)
                 }
             }
         }

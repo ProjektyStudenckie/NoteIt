@@ -1,6 +1,5 @@
 package com.sww.noteit.view
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_login.*
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import java.io.InputStream
 
 
 class LoginActivity : AppCompatActivity() {
@@ -23,7 +21,13 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        var user: String = ""
+        // hide action bar
+        try {
+            this.supportActionBar!!.hide()
+        } catch (e: NullPointerException) {
+        }
+
+        var user = ""
 
         loginBtn.setOnClickListener {
 

@@ -1,5 +1,6 @@
 package com.sww.noteit.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +11,8 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import com.sww.noteit.R
 import com.sww.noteit.databinding.InstantNoteFragmentBinding
 import com.sww.noteit.model.DataContainer
@@ -25,7 +28,6 @@ class InstantNoteFragment : Fragment() {
     private lateinit var instantNoteViewModel: InstantNoteViewModel
 
     lateinit var currentNote: File
-    var shouldLoad = false
 
     private lateinit var et_noteContent: EditText
 
@@ -59,7 +61,6 @@ class InstantNoteFragment : Fragment() {
                 val data: String = "" + s
                 Log.e("note: ", data)
                 saveDataInternally(data)
-                shouldLoad = true
             }
         })
 
@@ -75,7 +76,6 @@ class InstantNoteFragment : Fragment() {
             instatNoteDbDir.mkdirs()
 
             // create new file for currrent user
-
             val note = File(instatNoteDbDir, "${DataContainer.userName}.txt")
             if(note.exists()) {
                 DataHolder.SINGLETON_currentNote = note
@@ -119,6 +119,12 @@ class InstantNoteFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.save_note_instant_menu_item) {
             Toast.makeText(this.requireContext(), "Save Instant Note", Toast.LENGTH_SHORT).show()
+
+//            val navController = findNavController(R.id.)
+
+//            val intent = Intent(this, EditNoteActivity::class.java)
+//            intent.putExtra(NotesFragment.NOTE_ID, noteID)
+//            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }

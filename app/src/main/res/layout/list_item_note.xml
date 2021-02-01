@@ -32,6 +32,15 @@
         tools:text="04.01.2021" />
 
 
+    <TextView
+        android:id="@+id/imgURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/note_title"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"

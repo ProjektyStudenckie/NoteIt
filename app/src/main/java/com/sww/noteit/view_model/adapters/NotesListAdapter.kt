@@ -34,6 +34,11 @@ class NotesListAdapter(private val context: Context) :
 
         if (holder is MyViewHolder) {
             holder.itemView.note_title.text = note.Title
+            if(note.ImageURL==""){
+                holder.itemView.imgURL.text="BRAK ZDJECIA"
+            } else{
+                holder.itemView.imgURL.text=note.ImageURL
+            }
 
             val format = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.GERMAN)
             holder.itemView.note_date.text = LocalDate.parse(note.DateDate,format).toString()

@@ -134,6 +134,7 @@ class NoteActivity : AppCompatActivity(), PhotosListAdapter.OnClickListener {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_REQUEST_CODE) {
                 val thumbNail: Bitmap = data!!.extras!!.get("data") as Bitmap
+                DataContainer.currentNote.ImageURL="wykop.pl"
                 //imageView.setImageBitmap(thumbNail)
 
                 //Todo add item to recycler view

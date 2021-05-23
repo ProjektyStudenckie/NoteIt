@@ -43,19 +43,6 @@ class LoginActivity : AppCompatActivity() {
             val input2 = findViewById<TextInputLayout>(R.id.loginPassword)
             val password: String = input2.editText!!.text.toString()
 
-            val fireREf = FirebaseDatabase.getInstance().getReference("Note It")
-
-            fireREf.setValue("gowno").addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.e(
-                        "Suc ! " , task.exception!!.message!!
-                    )
-                } else {
-                    Log.e(
-                        "Error ! " , task.exception!!.message!!
-                    )
-                }
-            }
 
             if ("" != name && "" != password) {
 
